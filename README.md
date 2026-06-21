@@ -20,6 +20,47 @@ The assignment focuses on ingestion, transformation, data modeling, data quality
 
 ## How to Run the Pipeline
 
+The project can be run either locally with dbt installed, or through Docker. 
+
+---
+
+### Option 1: Run with Docker
+
+Build the Docker image from the repository root:
+
+```bash
+docker build -t dbt-spiris .
+```
+
+Run the full pipeline:
+
+```bash
+docker run --rm dbt-spiris
+```
+
+The Docker image runs the dbt project inside the container. 
+The default command should run the dbt models and the final mart tests:
+
+```bash
+dbt run --profiles-dir . && dbt test --profiles-dir . --select marts
+```
+
+This builds the ingestion, staging, intermediate, and mart models, then validates the final analytics marts.
+
+The staging layer contains intentionally dirty source data, so staging tests may fail if all tests are run. 
+For this reason, the container validates the final marts with:
+
+```bash
+dbt test --profiles-dir . --select marts
+```
+
+This checks that the final analytics outputs are valid after the intermediate cleaning and filtering logic has been applied.
+
+---
+
+
+### Option 1: Run locally
+
 ### 1. Install dependencies
 
 Create and activate a Python environment, then install dbt with the DuckDB adapter.
@@ -83,7 +124,6 @@ The final analytics marts are built from validated intermediate models.
 ## Possible Improvements
 
 * Add orchestration using Airflow, Dagster, or Prefect
-* Add Docker or docker-compose for easier local setup
 * Add CI/CD to run `dbt run` and `dbt test` automatically on pull requests
 * Add more custom dbt tests for business rules, such as non-negative revenue and valid order statuses
 * Add source freshness checks if the data arrives on a schedule
