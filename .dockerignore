@@ -1,0 +1,8 @@
+.git
+target
+logs
+dbt_packages
+__pycache__
+*.pyc
+.venv
+.env
