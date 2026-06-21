@@ -57,8 +57,9 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('stg_customers')
-              field: customer_id
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
 
       - name: order_timestamp
         description: "Timestamp for when the order was placed."
@@ -70,7 +71,8 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['completed', 'cancelled', 'refunded']
+              arguments:
+                values: ['completed', 'cancelled', 'refunded']
 
   - name: stg_order_items
     description: "Typed order line item source data from order_items.csv."
@@ -80,16 +82,18 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('stg_orders')
-              field: order_id
+              arguments:
+                to: ref('stg_orders')
+                field: order_id
 
       - name: product_id
         description: "Foreign key to products."
         tests:
           - not_null
           - relationships:
-              to: ref('stg_products')
-              field: product_id
+              arguments:
+                to: ref('stg_products')
+                field: product_id
 
       - name: quantity
         description: "Number of units ordered."

@@ -32,7 +32,8 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['completed', 'cancelled', 'refunded']
+              arguments:
+                values: ['completed', 'cancelled', 'refunded']
 
       - name: order_total_amount
         tests:
@@ -119,7 +120,8 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['low', 'medium', 'high']
+              arguments:
+                values: ['low', 'medium', 'high']
 
       - name: issue_description
         tests:
