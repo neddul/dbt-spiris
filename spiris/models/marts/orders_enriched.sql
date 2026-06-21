@@ -3,7 +3,7 @@ select
     o.order_timestamp,
     o.order_date,
     o.customer_id,
-    c.country,
+    coalesce(c.country, 'unknown') as country,
     o.order_status,
     a.order_total_amount,
     a.number_of_items
