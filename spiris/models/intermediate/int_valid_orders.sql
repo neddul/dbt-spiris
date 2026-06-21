@@ -1,3 +1,4 @@
+-- count occurances of each order
 with orders_with_counts as (
 
     select
@@ -23,7 +24,7 @@ where o.order_id is not null
   and o.customer_id is not null
   and o.order_timestamp is not null
   and c.customer_id is not null
-  and o.order_id_count = 1
+  and o.order_id_count = 1 -- remove duplicate orders
 
 /*
 
