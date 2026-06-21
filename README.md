@@ -8,8 +8,9 @@ The pipeline ingests raw CSV files, applies typing and validation logic, creates
 
 The solution uses:
 
-* dbt
-* DuckDB
+* python 3.12.0
+* dbt 1.11.11
+* DuckDB 1.5.3
 * SQL
 * CSV source files
 
