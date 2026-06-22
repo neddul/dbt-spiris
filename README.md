@@ -39,10 +39,10 @@ docker run --rm dbt-spiris
 ```
 
 The Docker image runs the dbt project inside the container. 
-The default command should run the dbt models and the final mart tests:
+The default command should run the dbt models and the final mart tests and also exports marts as .csv files:
 
 ```bash
-dbt run --profiles-dir . && dbt test --profiles-dir . --select marts
+docker run --rm -v "$(pwd)/spiris/exports:/app/spiris/exports" dbt-spiris
 ```
 
 This builds the ingestion, staging, intermediate, and mart models, then validates the final analytics marts.
